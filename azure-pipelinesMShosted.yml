@@ -16,9 +16,15 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
+- script: |
+    echo "Listing files..."
+    ls -R
+  displayName: 'Show folder structure'
+
 - task: Docker@2
   inputs:
       containerRegistry: 'Docker-Dotnetcorewebapi'
       repository: 'anilgaikwad123/dotnetcorewebapi'
       command: 'buildAndPush'
-      Dockerfile: '**/Dockerfile'
+      Dockerfile: '$(Build.SourcesDirectory)/Dotnetcorewebapi/Dockerfile'
+      buildContext: '$(Build.SourcesDirectory)/Dotnetcorewebapi'
