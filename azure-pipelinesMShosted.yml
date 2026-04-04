@@ -27,6 +27,12 @@ steps:
   inputs:
     WaitForProcessing: true
 
+- task: AdvancedSecurity-Publish@1
+  inputs:
+    SarifsInputDirectory: '$(Build.SolutionDirectory)/.gdn/'
+    EnableRecursiveScanning: true
+    WaitForProcessing: true
+
   
 - script: |
     echo "Listing files..."
