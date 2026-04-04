@@ -22,6 +22,16 @@ steps:
   inputs:
     languages: 'csharp'
     querysuite: 'code-scanning'
+
+- task: AdvancedSecurity-Codeql-Analyze@1
+  inputs:
+    WaitForProcessing: true
+
+- task: AdvancedSecurity-Publish@1
+  inputs:
+    SarifsInputDirectory: '$(Build.ArtifactStagingDirectory)/.gdn/'
+    EnableRecursiveScanning: true
+    WaitForProcessing: true
   
   
 
