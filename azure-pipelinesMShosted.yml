@@ -25,7 +25,7 @@ steps:
 
 - task: DotNetCoreCLI@2
   inputs:
-    command: 'Dotnetcorewebapi'
+    command: 'build'
     projects: '**/*Dotnetcorewebapi/*.csproj'
 
 - task: AdvancedSecurity-Codeql-Analyze@1
