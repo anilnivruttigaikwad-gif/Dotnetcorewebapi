@@ -14,27 +14,53 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
+
+
 steps:
+- task: SonarCloudPrepare@4
+  inputs:
+      SonarQube: 'Sonarcloud'
+      organization: 'devops-anil-1'
+      scannerMode: 'dotnet'
+      projectKey: 'devops-anil_Dotnetcorewebapi'
+      projectName: 'Dotnetcorewebapi'
+      
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
-- task: AdvancedSecurity-Codeql-Init@1
+- task: SonarCloudAnalyze@4
   inputs:
-    languages: 'csharp'
-    querysuite: 'code-scanning'
+      jdkversion: 'JAVA_HOME_17_X64'
 
-- task: AdvancedSecurity-Codeql-Analyze@1
+- task: SonarCloudPublish@4
   inputs:
-    WaitForProcessing: true
+    pollingTimeoutSec: '240'
 
-- task: AdvancedSecurity-Publish@1
-  inputs:
-    SarifsInputDirectory: '$(Build.ArtifactStagingDirectory)/.gdn/'
-    EnableRecursiveScanning: true
-    WaitForProcessing: true
+
+
+
+
+# - task: AdvancedSecurity-Codeql-Init@1
+#   inputs:
+#     languages: 'csharp'
+#     querysuite: 'code-scanning'
+
+# - task: DotNetCoreCLI@2
+#   inputs:
+#     command: 'build'
+#     projects: '**/*Dotnetcorewebapi/*.csproj'
+
+# - task: AdvancedSecurity-Codeql-Analyze@1
+#   inputs:
+#     WaitForProcessing: true
+
+# - task: AdvancedSecurity-Publish@1
+#   inputs:
+#     SarifsInputDirectory: '$(Build.SolutionDirectory)/.gdn/'
+#     EnableRecursiveScanning: true
+#     WaitForProcessing: true
+
   
-  
-
 - script: |
     echo "Listing files..."
     ls -R
