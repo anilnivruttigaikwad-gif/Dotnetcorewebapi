@@ -23,6 +23,11 @@ steps:
     languages: 'csharp'
     querysuite: 'code-scanning'
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '**/*.sln'
+
 - task: AdvancedSecurity-Codeql-Analyze@1
   inputs:
     WaitForProcessing: true
