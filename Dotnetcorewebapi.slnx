@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="Dotnetcorewebapi/Dotnetcorewebapi.csproj" />
+  <Project Path="TestProject1/TestProject1.csproj" Id="61f10776-861e-455c-9416-adc78679971b" />
 </Solution>
