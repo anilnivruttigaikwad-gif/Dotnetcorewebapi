@@ -72,6 +72,23 @@ steps:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: drop1
 
+- task: IISWebAppManagementOnMachineGroup@0
+  inputs:
+    EnableIIS: true
+    IISDeploymentType: 'IISWebsite'
+    ActionIISWebsite: 'CreateOrUpdateWebsite'
+    WebsiteName: 'Dotnetwebapi'
+    WebsitePhysicalPath: '%SystemDrive%\inetpub\wwwroot'
+    WebsitePhysicalPathAuth: 'WebsiteUserPassThrough'
+
+- task: IISWebAppDeploymentOnMachineGroup@0
+  inputs:
+    WebSiteName: 'Dotnetwebapi'
+    Package: '$(System.DefaultWorkingDirectory)\**\*.zip'
+
+
+
+
 
 
 
